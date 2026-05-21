@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>具身智能 Weekly｜世界模型、VLA 与机器人落地</title>
+  <meta name="description" content="具身智能 Weekly 云端发布页：覆盖前沿洞察、融资、产品、技术进展与创业机会地图。" />
+  <style>
+    :root {
+      --bg:#f6f7f9; --card:#ffffff; --ink:#1c2430; --muted:#667085; --line:#e5e7eb;
+      --brand:#2563eb; --brand-dark:#1d4ed8; --soft:#eef4ff; --soft2:#f8fafc; --accent:#0f766e;
+      --shadow: 0 10px 30px rgba(15, 23, 42, .08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;line-height:1.68}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1180px;margin:0 auto;padding:0 22px}
+    header.hero{background:linear-gradient(180deg,#ffffff 0%,#f7fbff 80%,var(--bg) 100%);border-bottom:1px solid var(--line)}
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0;color:var(--muted);font-size:14px}
+    .nav strong{color:var(--ink)}
+    .nav-links{display:flex;gap:18px;flex-wrap:wrap}
+    .hero-body{padding:52px 0 42px}
+    .label{display:inline-flex;align-items:center;gap:8px;background:var(--soft);color:var(--brand-dark);padding:6px 12px;border-radius:999px;font-size:13px;font-weight:650}
+    h1{font-size:clamp(34px,5vw,62px);line-height:1.08;margin:18px 0 18px;letter-spacing:-.04em}
+    .subtitle{font-size:18px;color:#344054;max-width:880px;margin:0 0 26px}
+    .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:30px}
+    .stat{background:rgba(255,255,255,.8);border:1px solid var(--line);border-radius:18px;padding:16px 18px;box-shadow:0 5px 18px rgba(15,23,42,.04)}
+    .stat b{display:block;font-size:28px;line-height:1.1;color:var(--brand-dark)}
+    .stat span{font-size:13px;color:var(--muted)}
+    section{padding:44px 0}
+    .section-title{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:20px}
+    .section-title h2{font-size:30px;line-height:1.2;margin:0;letter-spacing:-.02em}
+    .section-title p{margin:0;color:var(--muted);max-width:620px}
+    .one-paragraph{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:28px;box-shadow:var(--shadow);font-size:18px}
+    .trend-pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .pill{padding:6px 12px;border-radius:999px;background:#f1f5f9;color:#334155;font-size:13px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .insight-card,.tech-card,.panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 8px 24px rgba(15,23,42,.05)}
+    .insight-card h3,.tech-card h3,.opp-row h3{margin:8px 0 10px;line-height:1.35}
+    .eyebrow,.org{font-size:13px;color:var(--muted)}
+    .insight-card ul{padding-left:20px;margin:14px 0 0;color:#344054}
+    .table-wrap{overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:0 8px 24px rgba(15,23,42,.05)}
+    table{width:100%;border-collapse:collapse;min-width:860px;background:white}
+    th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+    th{background:#f8fafc;color:#344054;font-size:13px;white-space:nowrap}
+    td{font-size:14px}
+    tr:last-child td{border-bottom:0}
+    .note{margin:12px 0 0;color:var(--muted);font-size:13px}
+    .filters{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+    .filter-btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 13px;color:#475467;cursor:pointer;font-size:13px}
+    .filter-btn.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+    .search{width:100%;margin:0 0 18px;border:1px solid var(--line);border-radius:16px;padding:14px 16px;font-size:15px;background:#fff}
+    .tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .tech-card{display:flex;flex-direction:column;gap:8px}
+    .tag{align-self:flex-start;background:#ecfdf3;color:#027a48;border:1px solid #d1fadf;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:650}
+    .tech-card p{margin:0;color:#344054;font-size:14px}
+    .tech-card strong{color:#101828}
+    .opps{background:#0f172a;color:#fff;border-radius:28px;padding:26px;box-shadow:var(--shadow)}
+    .opps .section-title p,.opps .section-title h2{color:#fff}
+    .opp-row{display:grid;grid-template-columns:240px 1fr 1.2fr;gap:20px;padding:20px 0;border-top:1px solid rgba(255,255,255,.15)}
+    .opp-row:first-of-type{border-top:0}
+    .opp-row span{display:inline-block;color:#93c5fd;font-weight:700;font-size:13px;margin-bottom:4px}
+    .opp-row h3{color:#fff;font-size:18px;margin:0}
+    .opp-row p{margin:0;color:#dbeafe}
+    .opp-row .cutin{color:#cbd5e1}
+    footer{padding:32px 0 48px;color:var(--muted);font-size:13px}
+    .backtop{position:fixed;right:18px;bottom:18px;border:0;background:var(--brand);color:#fff;border-radius:999px;padding:10px 13px;box-shadow:var(--shadow);cursor:pointer}
+    @media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.grid-2,.tech-grid{grid-template-columns:1fr}.opp-row{grid-template-columns:1fr}.nav{align-items:flex-start;gap:10px;flex-direction:column}}
+    @media print{.nav,.filters,.search,.backtop{display:none}body{background:#fff}section{padding:24px 0}.tech-grid,.grid-2{grid-template-columns:1fr 1fr}.tech-card,.insight-card,.one-paragraph,.table-wrap{break-inside:avoid;box-shadow:none}}
+  </style>
+</head>
+<body>
+<header class="hero" id="top">
+  <div class="container">
+    <nav class="nav">
+      <strong>具身智能 Weekly</strong>
+      <div class="nav-links">
+        <a href="#insights">前沿洞察</a><a href="#financing">融资</a><a href="#products">产品</a><a href="#tech">技术进展</a><a href="#opportunities">机会地图</a>
+      </div>
+    </nav>
+    <div class="hero-body">
+      <span class="label">本周主线：World Model × VLA × Robot Deployment</span>
+      <h1>具身智能正在从“模型突破”进入“可部署系统”阶段</h1>
+      <p class="subtitle">本页基于《具身Weekly 纯内容版》整理为可云端发布的静态网页，保留全部板块，抽取重点内容，并补齐“一段话”摘要与“创业机会地图”。</p>
+      <div class="stats">
+        <div class="stat"><b>2</b><span>前沿洞察</span></div>
+        <div class="stat"><b>10</b><span>融资事件</span></div>
+        <div class="stat"><b>11</b><span>产品 / 方案</span></div>
+        <div class="stat"><b>18</b><span>技术进展</span></div>
+        <div class="stat"><b>7</b><span>创业机会方向</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="summary">
+    <div class="container">
+      <div class="section-title"><h2>1. 一段话</h2><p>补充全文总结摘要</p></div>
+      <div class="one-paragraph">
+        本周具身智能的核心信号是：行业正在从单点模型能力展示，转向“世界模型提供想象与预测、VLA 负责语义到动作映射、实时推理与反馈机制支撑闭环控制、Neo-Integrator 完成真实场景部署”的系统化竞争。前沿讨论聚焦世界模型能否成为机器人规模化数据与训练基础设施；融资端资金继续流向人形机器人、灵巧操作、具身基础设施、外骨骼和数据/世界模型公司；产品端从传感器、移动操作平台、数据工厂、工业人形部署到教育平台均在扩张；技术端则集中突破零样本梦境训练、关键期避险、VLA 鲁棒性、实时低延迟、长程记忆、双臂协同、社会化导航与反馈世界模型。整体看，下一阶段真正有商业价值的公司不会只停留在“模型更强”，而会围绕数据、部署、鲁棒性、实时控制和垂直场景形成可复用系统。
+        <div class="trend-pills"><span class="pill">世界模型</span><span class="pill">VLA</span><span class="pill">Neo-Integrator</span><span class="pill">机器人数据工厂</span><span class="pill">实时控制</span><span class="pill">长程记忆</span><span class="pill">安全鲁棒</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="insights">
+    <div class="container">
+      <div class="section-title"><h2>2. 前沿洞察</h2><p>从行业叙事看，本周最重要的两条线索分别是世界模型基础设施化，以及机器人集成商向数据与模型驱动的 Neo-Integrator 升级。</p></div>
+      <div class="grid-2">
+<article class="insight-card">
+  <div class="eyebrow">Deedy Das / X</div>
+  <h3>世界模型正在成为机器人规模化的关键基础设施</h3>
+  <p>过去 18 个月世界模型赛道吸引约 100 亿美元投入，讨论从“生成视频”扩展到为机器人基础模型提供可扩展训练数据与物理直觉。核心问题不再只是画面逼真，而是能否同时具备长期一致性、交互可控性、物理因果、空间记忆与可用于机器人训练的反馈信号。</p>
+  <ul><li>代表项目覆盖 Google Genie、Tesla Optimus、NVIDIA DreamDojo / DreamZero、Microsoft Muse、World Labs、Runway、Skild、Physical Intelligence、Figure 等。</li><li>真正机会在于把世界模型从内容生成工具变成机器人训练、评估、预演和部署校准的基础设施。</li></ul>
+</article>
+<article class="insight-card">
+  <div class="eyebrow">Avi Zurlo / X</div>
+  <h3>Neo-Integrator 将成为机器人落地价值捕获层</h3>
+  <p>传统工业机器人部署中，硬件通常只占总成本的 40-50%，其余主要来自系统集成、开发、调试、安全与运维。Robot Learning 会压缩开发成本，但现场集成仍高度垂直、劳动密集，因此“懂模型 + 懂垂直场景 + 拿得到客户现场数据”的 Neo-Integrator 有望捕获部署剩余价值。</p>
+  <ul><li>打法演进：Teleoperation 先创收并积累训练数据；半自主化提升毛利；最终向 Zero-shot Deployment 过渡。</li><li>适合创业切入的场景通常具备弱劳动经济学、任务重复度高、现场集成复杂、客户愿意为可靠性和托管服务付费等特征。</li></ul>
+</article></div>
+    </div>
+  </section>
+
+  <section id="financing">
+    <div class="container">
+      <div class="section-title"><h2>3. 本周融资</h2><p>资金集中流向具身基础设施、人形/灵巧机器人、外骨骼、特种机器人与消费级制造平台。</p></div>
+      <div class="table-wrap "><table><thead><tr><th>企业名称</th><th>融资金额</th><th>融资轮次</th><th>融资日期</th><th>投资方</th><th>核心业务与定位</th></tr></thead><tbody><tr><td>严格技术</td><td>未透露</td><td>战略投资</td><td>2026/5/13</td><td>西部资本、国富创新投资</td><td>特种专用机器人研发商，聚焦钢铁冶金、航天军工等场景。</td></tr><tr><td>Zenbot</td><td>近亿元</td><td>天使轮</td><td>2026/5/14</td><td>长盈精密/科达利/肇民科技家族办公室、L2F光源创业者基金、天狼星资本</td><td>具身智能基础设施开发商，提供一站式解决方案。</td></tr><tr><td>望默科技</td><td>未透露</td><td>天使轮</td><td>2026/5/14</td><td>白云基金</td><td>智能穿戴式机器人平台研发，方向为外骨骼机器人。</td></tr><tr><td>灵御智能</td><td>近亿人民币</td><td>天使+轮</td><td>2026/5/14</td><td>福田资本领投</td><td>具身智能机器人研发商，提供通用操作整体解决方案。</td></tr><tr><td>开普勒 KEPLER</td><td>数千万元人民币</td><td>战略投资</td><td>2026/5/14</td><td>霞创壹号</td><td>通用人形机器人研发、生产及应用生态。</td></tr><tr><td>无限工坊</td><td>近亿元</td><td>A轮</td><td>2026/5/15</td><td>美团战投、昆仑资本、奇创坛</td><td>消费级桌面 CNC 与智能数字制造平台。</td></tr><tr><td>LiberAI</td><td>数亿元（含前几轮）</td><td>天使+轮</td><td>2026/5/15</td><td>真格基金、红杉中国、美团龙珠、顺为资本等</td><td>具身智能模型及配套硬件研发，重点为 UMI 数据与世界模型。</td></tr><tr><td>博银合创</td><td>近3亿元</td><td>Pre-A轮</td><td>2026/5/15</td><td>元禾辰坤领投</td><td>灵巧型机器人研发商，专注复杂装配、智能质检等任务。</td></tr><tr><td>飞阔科技</td><td>未透露</td><td>战略投资</td><td>2026/5/16</td><td>众擎机器人</td><td>机器人具身智能场景化解决方案提供商，代表系统为 FLY・天枢。</td></tr><tr><td>成都人形机器人创新中心</td><td>未透露</td><td>战略投资</td><td>2026/5/16</td><td>蜀道投资集团旗下核心场景企业</td><td>人形机器人核心技术攻关与研发。</td></tr></tbody></table></div>
+      <p class="note">整理口径：保留文档中的核心融资事件与定位描述，企业名称按可读性做了合并修正。</p>
+    </div>
+  </section>
+
+  <section id="products">
+    <div class="container">
+      <div class="section-title"><h2>4. 本周产品</h2><p>产品动态覆盖传感器、移动操作机器人、数据工厂、工业机器人系统、人形机器人部署、机器人教育与互连底层技术。</p></div>
+      <div class="table-wrap "><table><thead><tr><th>日期</th><th>地区</th><th>产品 / 方案</th><th>发布公司</th><th>重点简介</th></tr></thead><tbody><tr><td>5月11日</td><td>中国</td><td>PX6D 霍尔效应六维力传感器</td><td>帕西尼 PaXini</td><td>面向机器人力觉/触觉感知的六维力传感器，强调高采样、低延迟、抗冲击、轻薄与低成本，支持 IP65/IP67/IP68 等防护等级。</td></tr><tr><td>5月12日</td><td>美国</td><td>Stretch 4 移动操作机器人平台</td><td>Hello Robot</td><td>开源移动操作机器人平台，面向 Physical AI 开发者和应用工程师，配置伸缩机械臂、全向移动底盘和多传感器，覆盖家政、助老、安全移动等场景。</td></tr><tr><td>5月12日</td><td>美国</td><td>Data Factory 1 / Sonny 机器人数据工厂</td><td>Tutor Intelligence</td><td>由约 100 台 Sonny 机器人组成，用于训练机器人基础模型，通过遥操作、监督与远程纠错学习生成物理世界数据。</td></tr><tr><td>5月13日</td><td>日本 / 美国</td><td>FANUC Physical AI Robot System + Google Gemini Enterprise</td><td>FANUC + Google / Intrinsic</td><td>FANUC 与 Google 合作增强工业机器人系统，使机器人能够理解自然语言与物体并自主执行任务。</td></tr><tr><td>5月13日</td><td>中国</td><td>GD01 载人可变形机甲机器人</td><td>宇树科技 Unitree</td><td>半吨级载人甲式机器人，可在双足与四足形态间转换，更偏向展示、品牌传播与工程验证。</td></tr><tr><td>5月13日</td><td>英国 / 德国</td><td>HMND 01 工业人形机器人部署方案</td><td>Humanoid + Schaeffler</td><td>Humanoid 与 Schaeffler 合作，计划到 2032 年在 Schaeffler 全球制造基地部署 1000 台人形机器人，任务包括箱体搬运与装配测试。</td></tr><tr><td>5月14日</td><td>中国</td><td>RoboFusion 机器人本体互连技术体系</td><td>腾讯 Robotics X 实验室 + 福田实验室</td><td>面向机器人本体的互连架构，提出“一线到底”全栈 IP 化，统一控制数据传输，降低布线复杂度。</td></tr><tr><td>5月14日</td><td>中国</td><td>EgoTwin 高质量 Ego 人手 3D 对齐引擎</td><td>视启未来 / IDEA 研究院相关团队</td><td>面向具身智能训练数据的数据引擎，通过第一视角人手 3D 重建与对齐降低高质量数据采集成本。</td></tr><tr><td>5月14-16日</td><td>中国</td><td>π 系列 / H 系列轻量外骨骼助力机器人</td><td>肯綮科技</td><td>在 GAIE 2026 展出并开放体验，覆盖户外登山、徒步与老年人场景，主打 AI 运动意图识别、轻量化结构和人机协同算法。</td></tr><tr><td>5月11日</td><td>美国</td><td>Embodied AI Robotics Education Platform</td><td>Classover</td><td>面向 K-12 的具身 AI 机器人教育平台，整合人形机器人/机器狗硬件、AI 与机器人课程、Python/Scratch、智能体与感知学习。</td></tr><tr><td>5月13-14日</td><td>美国</td><td>FF EAI Robotics 产品商业化 / RobotShop 渠道进展</td><td>Faraday Future / FF AI-Robotics</td><td>披露 EAI 机器人商业化与渠道进展，并与北美机器人电商平台 RobotShop 推进相关合作。</td></tr></tbody></table></div>
+    </div>
+  </section>
+
+  <section id="tech">
+    <div class="container">
+      <div class="section-title"><h2>5. 技术进展</h2><p>18 项技术进展可以归为世界模型、VLA/机器人基础模型、实时推理、长程记忆、控制与安全鲁棒几条主线。</p></div>
+      <input class="search" id="search" placeholder="搜索技术进展：例如 世界模型、VLA、长程、实时、导航、HoloMotion..." />
+      <div class="filters" id="filters"><button class="filter-btn active" data-filter="all">全部</button></div>
+      <div class="tech-grid" id="techGrid">
+<article class="tech-card" data-tag="World Model / VLA">
+  <span class="tag">World Model / VLA</span>
+  <h3>RAW-Dream：任务无关世界模型里的零样本“梦境训练”</h3>
+  <p class="org">微软亚洲研究院、南京大学、UIUC、武汉大学、悉尼科技大学、清华大学</p>
+  <p><strong>核心看点：</strong>把世界模型的通用物理先验与下游任务数据解耦，让 VLA 在“想象沙盒”里后训练。</p>
+  <p><strong>关键结果：</strong>跨模拟与真实环境取得持续增益，目标是降低现实交互数据成本。</p>
+</article>
+<article class="tech-card" data-tag="AI for Science">
+  <span class="tag">AI for Science</span>
+  <h3>领域自适应 ML + XPCS 量化非平衡晶界动力学</h3>
+  <p class="org">麻省理工学院量子测量研究组、MIT 计算科学与工程中心</p>
+  <p><strong>核心看点：</strong>用理论模拟训练 AI，再迁移到高噪声 X 射线实验数据，提取材料微观动力学参数。</p>
+  <p><strong>关键结果：</strong>首次从复杂波动信号中解析晶界浓度、扩散率、刚度等指标。</p>
+</article>
+<article class="tech-card" data-tag="Safety / VLA">
+  <span class="tag">Safety / VLA</span>
+  <h3>DreamAvoid：关键阶段测试时梦境预演，降低 VLA 失败率</h3>
+  <p class="org">香港大学、香港科技大学、西北大学</p>
+  <p><strong>核心看点：</strong>在精细操作关键期生成候选动作并短视距推演，提前识别会导致失败的动作。</p>
+  <p><strong>关键结果：</strong>在真实与模拟机械臂任务中减少灾难性动作，提升整体成功率。</p>
+</article>
+<article class="tech-card" data-tag="RL / Control">
+  <span class="tag">RL / Control</span>
+  <h3>DR.Q：去偏置表示提升样本高效连续控制</h3>
+  <p class="org">腾讯混元、麦吉尔大学、北京大学计算机学院</p>
+  <p><strong>核心看点：</strong>通过互信息最大化和衰减优先级回放，减少早期经验与状态表征偏差。</p>
+  <p><strong>关键结果：</strong>一套超参数在多项连续控制基准中匹配或超过强基线。</p>
+</article>
+<article class="tech-card" data-tag="Interface / Agent">
+  <span class="tag">Interface / Agent</span>
+  <h3>Engagement Process：重构观察与行动的时间接口</h3>
+  <p class="org">小鹏机器人</p>
+  <p><strong>核心看点：</strong>把观察和行动从固定回合制解耦为异步事件流，处理延迟、长周期动作与多频协作。</p>
+  <p><strong>关键结果：</strong>揭示传统 step 接口忽略的时序问题，让策略适应显式时间成本。</p>
+</article>
+<article class="tech-card" data-tag="VLA / Policy">
+  <span class="tag">VLA / Policy</span>
+  <h3>AttenA+：用逆速度场重加权关键动作</h3>
+  <p class="org">香港科技大学（广州）、香港大学、中国科学技术大学、IDEA、南方科技大学、X-Humanoid</p>
+  <p><strong>核心看点：</strong>不改模型结构，只通过速度驱动注意力让模型更关注低速高精度关键片段。</p>
+  <p><strong>关键结果：</strong>在 LIBERO 等基准中将 OpenVLA-OFT 成功率提升至 98.6%，并在真实 Franka 测试中验证泛化。</p>
+</article>
+<article class="tech-card" data-tag="Bimanual / Policy">
+  <span class="tag">Bimanual / Policy</span>
+  <h3>CUBic：统一双臂感知与控制</h3>
+  <p class="org">北京航空航天大学、西湖大学、浙江大学、北京大学</p>
+  <p><strong>核心看点：</strong>用双向感知协调字典与统一扩散策略，让左右臂在共享表征中自然协同。</p>
+  <p><strong>关键结果：</strong>在 RoboTwin 双臂任务中提升协调准确性与成功率。</p>
+</article>
+<article class="tech-card" data-tag="Realtime VLA">
+  <span class="tag">Realtime VLA</span>
+  <h3>Realtime-VLA FLASH：投机推理压缩 dVLA 延迟</h3>
+  <p class="org">中科院计算所、中国科学院大学、南京大学、Dexmal</p>
+  <p><strong>核心看点：</strong>以轻量草稿模型快速生成动作，再由主模型并行验证，并在高难动作相位回退。</p>
+  <p><strong>关键结果：</strong>平均推理延迟降至 19.1ms，约 3.04 倍提速，支撑 50Hz 高频闭环控制。</p>
+</article>
+<article class="tech-card" data-tag="Navigation">
+  <span class="tag">Navigation</span>
+  <h3>HCSG：动态人群中的语义-几何导航</h3>
+  <p class="org">香港科技大学（广州）、清华大学（深圳）、北京科技大学、NUS、上海交大</p>
+  <p><strong>核心看点：</strong>同时预测人类轨迹与理解人类行为语义，把“躲人”升级为“看懂人”。</p>
+  <p><strong>关键结果：</strong>HA-VLNCE 中成功率提升 14%，碰撞率下降 34%。</p>
+</article>
+<article class="tech-card" data-tag="Robust VLA">
+  <span class="tag">Robust VLA</span>
+  <h3>PAIR-VLA：视觉突变下该忽略什么、该反应什么</h3>
+  <p class="org">香港科技大学、微软亚洲研究院、浙江大学</p>
+  <p><strong>核心看点：</strong>通过成对视觉变体和不变性/敏感性辅助目标，让 VLA 忽略无关视觉变化、响应任务相关变化。</p>
+  <p><strong>关键结果：</strong>在 ManiSkill3 严苛测试中微调性能最高提升 16.62%。</p>
+</article>
+<article class="tech-card" data-tag="World Model">
+  <span class="tag">World Model</span>
+  <h3>SANA-WM：2.6B 参数实现分钟级 720p 世界模型</h3>
+  <p class="org">英伟达</p>
+  <p><strong>核心看点：</strong>Hybrid Linear Attention、双分支相机控制与 long-video refiner 支撑一分钟相机可控视频生成。</p>
+  <p><strong>关键结果：</strong>使用约 213K clips 训练；distilled variant 可在单张 RTX 5090 上运行，降低长视频世界模型门槛。</p>
+</article>
+<article class="tech-card" data-tag="Unified Embodied Model">
+  <span class="tag">Unified Embodied Model</span>
+  <h3>Pelican-Unified 1.0：统一理解、推理、想象与行动</h3>
+  <p class="org">北京人形机器人创新中心（X-Humanoid）</p>
+  <p><strong>核心看点：</strong>用同一 VLM 与未来生成器闭环连接视觉理解、语言推理、未来视频和动作生成。</p>
+  <p><strong>关键结果：</strong>8 个 VLM 基准平均 64.7；WorldArena EWM Score 66.03；RoboTwin 平均成功率 93.5%。</p>
+</article>
+<article class="tech-card" data-tag="Benchmark / Agent">
+  <span class="tag">Benchmark / Agent</span>
+  <h3>LongAct &amp; HoloMind：长程家务基准与记忆型 Agent</h3>
+  <p class="org">中科院自动化所、中关村学院、中国科学院大学</p>
+  <p><strong>核心看点：</strong>把家务任务建成数千步长程执行问题，并用 DAG 规划、空间记忆、情景记忆和 Critic 形成闭环。</p>
+  <p><strong>关键结果：</strong>GPT-5 在 HoloMind 下目标完成率 59.0%、全任务成功率约 16%，显示长程执行仍是瓶颈。</p>
+</article>
+<article class="tech-card" data-tag="Scene Understanding">
+  <span class="tag">Scene Understanding</span>
+  <h3>SceneParser：连接物体、部件与可操作 affordance</h3>
+  <p class="org">哈尔滨工业大学（深圳）、中关村学院、华中科技大学、北邮、华南理工、牛津、北大</p>
+  <p><strong>核心看点：</strong>把场景解析为 scene-object-part-affordance 层级链，让视觉理解直接服务交互规划。</p>
+  <p><strong>关键结果：</strong>构建含 110K 训练图像、1.74M affordance 标注的数据集，并在层级解析上优于拼接式管线。</p>
+</article>
+<article class="tech-card" data-tag="Long-horizon Policy">
+  <span class="tag">Long-horizon Policy</span>
+  <h3>DSSP：全历史状态空间策略提升长程操作</h3>
+  <p class="org">上海交通大学</p>
+  <p><strong>核心看点：</strong>用 Mamba 类 SSM 把完整多模态历史压缩为 context token，再条件化扩散动作生成。</p>
+  <p><strong>关键结果：</strong>RoboTwin 2.0 平均相对提升 12.8%；真实机器人平均成功率从 30% 提升到 70%。</p>
+</article>
+<article class="tech-card" data-tag="Humanoid Motion">
+  <span class="tag">Humanoid Motion</span>
+  <h3>HoloMotion-1：视频衍生动作语料驱动人形全身跟踪</h3>
+  <p class="org">地平线机器人</p>
+  <p><strong>核心看点：</strong>用 2000 小时以上视频重建动作、动捕和内部数据训练稀疏 MoE Transformer，并结合 KV-cache 与序列级 PPO。</p>
+  <p><strong>关键结果：</strong>未见动作评测成功率 97.55%，关键点误差较强基线降低约 40%，真实平台可 200-300Hz 运行。</p>
+</article>
+<article class="tech-card" data-tag="Diffusion Decision">
+  <span class="tag">Diffusion Decision</span>
+  <h3>Ada-Diffuser：潜变量识别增强扩散式长程决策</h3>
+  <p class="org">UCSD、CMU、MBZUAI、斯坦福、约翰斯·霍普金斯大学</p>
+  <p><strong>核心看点：</strong>从短时间块中识别看不见的动态因素，并把潜变量估计嵌入扩散规划和策略学习。</p>
+  <p><strong>关键结果：</strong>覆盖 8 个环境 23 种设置，在 MuJoCo、Maze2D、RobotMimic、LIBERO-10 等任务中优于多类扩散基线。</p>
+</article>
+<article class="tech-card" data-tag="World Model / Feedback">
+  <span class="tag">World Model / Feedback</span>
+  <h3>Feedback World Model：用实时反馈校准扩散策略</h3>
+  <p class="org">南洋理工大学 MARS 实验室</p>
+  <p><strong>核心看点：</strong>推理时用动作后的真实观察更新轻量反馈状态，让世界模型持续自我校准。</p>
+  <p><strong>关键结果：</strong>最高减少 76.4% 世界模型预测误差，分布外成功率提升 30%。</p>
+</article></div>
+    </div>
+  </section>
+
+  <section id="opportunities">
+    <div class="container">
+      <div class="opps">
+        <div class="section-title"><h2>6. 创业机会地图</h2><p>基于本周内容补充的机会方向：更适合早期团队从工具链、数据、部署和垂直场景切入，而不是直接与大模型实验室正面竞争。</p></div>
+        
+<div class="opp-row">
+  <div><span>01</span><h3>世界模型基础设施</h3></div>
+  <p>SANA-WM、RAW-Dream、Feedback WM 都指向同一趋势：世界模型需要相机轨迹、物理尺度、反馈校准和任务可控。</p>
+  <p class="cutin">早期切入：做高质量 pose/3D 标注流水线、机器人 rollout 评测、世界模型数据清洗与合成、在线反馈校准中间件。</p>
+</div>
+<div class="opp-row">
+  <div><span>02</span><h3>垂直 Neo-Integrator</h3></div>
+  <p>模型能力会逐步通用，但客户现场、设备接入、安全合规和运维仍高度垂直。</p>
+  <p class="cutin">早期切入：从 3PL 仓储、质检、餐饮后厨、制造搬运、危险工种等弱劳动经济学场景切入，先用遥操作托管服务获取收入与数据。</p>
+</div>
+<div class="opp-row">
+  <div><span>03</span><h3>机器人数据工厂</h3></div>
+  <p>Data Factory、EgoTwin、视频衍生动作语料说明，数据质量和采集成本仍是瓶颈。</p>
+  <p class="cutin">早期切入：建设遥操作采集、第一视角手部/物体 3D 对齐、自动纠错、仿真增强和任务标签体系。</p>
+</div>
+<div class="opp-row">
+  <div><span>04</span><h3>实时 VLA 与边缘部署</h3></div>
+  <p>FLASH、HoloMotion-1 都表明大模型必须在受限算力上实时闭环。</p>
+  <p class="cutin">早期切入：做投机推理、稀疏激活、KV-cache、动作验证、嵌入式运行时和机器人端模型压缩工具。</p>
+</div>
+<div class="opp-row">
+  <div><span>05</span><h3>鲁棒与安全中间件</h3></div>
+  <p>DreamAvoid、PAIR-VLA、HCSG 都在解决“会做”到“稳定安全地做”的鸿沟。</p>
+  <p class="cutin">早期切入：做关键阶段避险、视觉扰动鲁棒训练、社交导航、安全边界评估和失败样本管理。</p>
+</div>
+<div class="opp-row">
+  <div><span>06</span><h3>长程记忆与任务规划</h3></div>
+  <p>LongAct、DSSP、SceneParser 指向从单步技能到长程任务的系统升级。</p>
+  <p class="cutin">早期切入：做家庭/工业长程任务基准、空间/情景记忆、层级场景解析、可操作 affordance 和过程级 Critic。</p>
+</div>
+<div class="opp-row">
+  <div><span>07</span><h3>教育与开发者平台</h3></div>
+  <p>Classover 与 Stretch 4 显示市场需要从硬件、课程到开发工具的低门槛入口。</p>
+  <p class="cutin">早期切入：面向 K-12、工程师和企业客户提供具身 AI 课程、标准化机器人平台、开发者 SDK 与任务模板。</p>
+</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">资料来源：具身Weekly 纯内容版 PDF。网页为发布版精简整理，适合上传至静态托管、企业官网、Notion/飞书网页或对象存储。</div>
+</footer>
+<button class="backtop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+  const cards = Array.from(document.querySelectorAll('.tech-card'));
+  const filterWrap = document.getElementById('filters');
+  const tags = Array.from(new Set(cards.map(c => c.dataset.tag))).sort();
+  tags.forEach(tag => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn'; btn.dataset.filter = tag; btn.textContent = tag;
+    filterWrap.appendChild(btn);
+  });
+  let activeFilter = 'all';
+  let query = '';
+  function render() {
+    cards.forEach(card => {
+      const tagOk = activeFilter === 'all' || card.dataset.tag === activeFilter;
+      const textOk = card.innerText.toLowerCase().includes(query);
+      card.style.display = tagOk && textOk ? '' : 'none';
+    });
+  }
+  filterWrap.addEventListener('click', e => {
+    if (!e.target.matches('.filter-btn')) return;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active'); activeFilter = e.target.dataset.filter; render();
+  });
+  document.getElementById('search').addEventListener('input', e => { query = e.target.value.trim().toLowerCase(); render(); });
+</script>
+</body>
+</html>
